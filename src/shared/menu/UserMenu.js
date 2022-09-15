@@ -1,6 +1,12 @@
+import { useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const UserMenu = (user) => {
+const UserMenu = (u) => {
+    const [user, setUser] = useState({});
+    useEffect(()=> {
+        setUser(u.user);
+    },[])
 
     return (
         <>
@@ -25,7 +31,6 @@ const UserMenu = (user) => {
                 <p>{user.user_dept}</p>
                 <div className="menu-sub logout-tab">
                     <Link to ={'/change/admin'}>관리자 전환</Link>
-                    <Link to ={'/logout'}>로그아웃</Link>
                 </div>
             </div>
         </>

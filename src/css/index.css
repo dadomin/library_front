@@ -51,6 +51,7 @@ button {
   cursor: pointer;
   border: none;
   transition: .3s;
+  background: none;
 }
 .btn {
   border-radius: 12px;
@@ -332,6 +333,12 @@ header>a {
   font-size: 21px;
   color: #fff;
 }
+header > div > button {
+  width: 20px;
+}
+header > div > button > img {
+  width: 100%;
+}
 
 #menu-tab {
   display: flex;
@@ -447,6 +454,75 @@ footer > h1 {
 
 footer > ul > li {
   margin: 5px 0;
+}
+
+/* main */
+#main {
+  margin: 50px auto;
+  padding: 30px 150px;
+}
+.main-section {
+  margin-bottom: 80px;
+}
+.main-section > h1 {
+  font-size: 21px;
+  color: #4265ed;
+  margin-bottom: 30px;
+  padding-left: 12px;
+  border-left: 4px solid #6280f6;
+}
+.main-detail {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.main-detail > div {
+  flex: 1;
+  background-color: #fff;
+  margin: 20px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px 5px rgba(173, 173, 173, 0.127);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+.main-detail > div:nth-child(2n) {
+  background-color: #6280f6d1;
+}
+.main-detail > div:nth-child(2n) > p,
+.main-detail > div:nth-child(2n) > h1, 
+.main-detail > div:nth-child(2n) > h1 > span,
+.main-detail > div:nth-child(2n) > h2 {
+  color: #fff;
+}
+.main-detail > div > p {
+  font-size: 14px;
+  margin-bottom: 12px;
+  font-weight: bold;
+  color: #000;
+}
+.main-detail > div > h1 {
+  color: #4265ed;
+  font-size: 14px;
+}
+.main-detail > div > h1 > span {
+  color: #4265ed;
+  font-size: 36px;
+  margin-right: 7px;
+  font-weight: bolder;
+}
+.main-detail > div > h2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 140px;
+  transform: translate(-50%,-50%);
+  color: #6280f6;
+  opacity: .1;
 }
 
 /* req-form */
@@ -581,9 +657,9 @@ footer > ul > li {
   background-color: #f3f4f5;
   border-radius: 12px;
 }
-.ft-file-box > label > svg,
-.ft-file-box > label > i {
-  font-size: 24px;
+.ft-file-box > label > img {
+  width: 50px;
+  opacity: .5;
 }
 
 input[name="ft-file"]:checked ~ label {

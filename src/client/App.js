@@ -8,7 +8,7 @@ const App =(props) =>{
   return (
     <>
       <Header/>
-      <h1>hi</h1>
+      <Tab tab={tab}/>   
       <Footer/>
     </>
   )

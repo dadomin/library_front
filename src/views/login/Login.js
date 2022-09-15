@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import loginBackImg from '../../img/login-back.png'
@@ -12,11 +13,11 @@ const Login = () => {
     const handlePw = (e) => setPw(e.target.value);
 
     
-    if(sessionStorage.getItem('user') != null) {
-        alert("로그아웃 후 로그인 하세요");
-        window.location.href = "/";
-        return;
-    }
+    // if(sessionStorage.getItem('user') != null) {
+    //     alert("로그아웃 후 로그인 하세요");
+    //     window.location.href = "/";
+    //     return;
+    // }
 
     function inputCheck() {
         console.log(id);
@@ -25,34 +26,59 @@ const Login = () => {
             alert("비워진 값이 존재합니다")
             return;
         }
-        
+
         axios
         .post('http://133.186.247.196:9000/user/login', {
             userId : id,
             passwd : pw
         })
+        .then((res)=> {
+            console.log(res.data)
+            let result = res.data;
+            if(result.status === "fail") {
+                alert(result.message);
+                return;
+            }
+            if(result.status=== "success") {
+                loginSession();
+            }
+        })
+        
+    }
+
+    const loginSession = () => {
+
+        axios
+        .post('http://localhost:3787/login', {
+            id : id,
+            pw : pw
+        })
         .then((res)=>{
             let userData = res.data[0];
-            if(userData.status === "fail") {
-                alert("ID 혹은 비밀번호 오류");
+            if(userData === undefined) {
+                alert("비밀번호가 틀렸습니다.");
                 return;
             }
             console.log("로그인 성공");
 
             sessionStorage.removeItem('user');
-            sessionStorage.removeItem('user_id');
             sessionStorage.removeItem('now');
 
             sessionStorage.setItem('user', JSON.stringify(userData));
-            sessionStorage.setItem('now', userData.adminType);
+            sessionStorage.setItem('now', userData.admin_type);
 
             console.log(sessionStorage);
             
             alert(`${JSON.parse(sessionStorage.user).user_name}님 로그인 성공`);
-            window.location.href= "/";
+            window.location.replace('/');
         })
     }
 
+    useEffect(()=> {
+        if(sessionStorage.getItem('now') !== null) {
+            window.location.replace('/');
+        }
+    },[])
 
     return(
         <section id="login">
